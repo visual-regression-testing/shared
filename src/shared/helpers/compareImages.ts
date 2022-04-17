@@ -1,10 +1,10 @@
 // @ts-ignore
-import {AWSError} from "aws-sdk";
-import {s3PutObjects} from "./s3PutObject";
+import {AWSError} from 'aws-sdk';
+import {s3PutObjects} from './s3PutObject';
 const sizeOf = require('buffer-image-size');
 
-const AWS = require("aws-sdk");
-const config = require("../../config/config").default;
+const AWS = require('aws-sdk');
+const config = require('../../config/config').default;
 
 const PNG = require('pngjs').PNG;
 const pixelmatch = require('pixelmatch');
@@ -15,12 +15,12 @@ async function compareImages(filename: string, pathToBaselineImage: string, path
     const params = {
         Bucket: config.bucket,
         Key: pathToBaselineImage + '/' + filename,
-    }
+    };
 
     const params2 = {
         Bucket: config.bucket,
         Key: pathtoNewImage + '/' + filename,
-    }
+    };
 
     const imageBaseline: any = await new Promise((resolve, reject) => {
         s3.getObject(params, (err: AWSError, data: any) => {
@@ -29,7 +29,7 @@ async function compareImages(filename: string, pathToBaselineImage: string, path
             }
 
             if (data) {
-                console.log('got data', data)
+                console.log('got data', data);
                 resolve(data);
             }
         });
@@ -42,7 +42,7 @@ async function compareImages(filename: string, pathToBaselineImage: string, path
             }
 
             if (data) {
-                console.log('got data', data)
+                console.log('got data', data);
                 resolve(data);
             }
         });
