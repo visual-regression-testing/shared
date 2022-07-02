@@ -1,14 +1,16 @@
-import mysql from 'serverless-mysql'
+import mysql from 'mysql2'
 
-export const db = mysql({
-    config: {
-        host: process.env.MYSQL_HOST,
-        database: process.env.MYSQL_DATABASE,
-        user: process.env.MYSQL_USERNAME,
-        password: process.env.MYSQL_PASSWORD,
-        port: parseInt(process.env.MYSQL_PORT as string, 10),
-    },
+const pool = mysql.createPool({
+    host: process.env.MYSQL_HOST,
+    database: process.env.MYSQL_DATABASE,
+    user: process.env.MYSQL_USERNAME,
+    password: process.env.MYSQL_PASSWORD,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
+
+const promisePool = pool.promise();
 
 export interface InsertResponse {
     fieldCount: number; // 0
@@ -26,10 +28,9 @@ export async function query<T>(
     values: (string | number)[] | string | number = []
 ) {
     try {
-        const results = await db.query<T>(q, values);
-        await db.end();
-        return results;
-    } catch (e) {
-        throw Error((e as any).message)
+        const [rows, /*fields*/] = await promisePool.query(q, values);
+        return rows;
+    } catch(e) {
+        throw new Error(e as any).message;
     }
 }

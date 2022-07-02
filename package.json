@@ -11,6 +11,10 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.51.0",
     "aws-sdk": "^2.1073.0",
-    "serverless-mysql": "^1.5.4"
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "cardinal": "^2.1.1"
   }
 }
