@@ -1,5 +1,5 @@
-import {query} from "../../config/db";
-import {Project} from "./listProjectsOfUser";
+import {query} from '../../config/db';
+import {Project} from './listProjectsOfUser';
 
 interface Resource {
     id: string;
@@ -13,5 +13,5 @@ export async function getResources(resourceHashIds: string[]): Promise<Resource[
     return query<Resource[]>(
         `SELECT * FROM resources WHERE hash_id IN (${parameterizedQuery})`,
         resourceHashIds
-    )
+    );
 }

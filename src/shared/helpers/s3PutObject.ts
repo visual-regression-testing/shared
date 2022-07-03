@@ -1,7 +1,7 @@
-import {PutObjectOutput} from "@aws-sdk/client-s3";
+import {PutObjectOutput} from '@aws-sdk/client-s3';
 
-import AWS from "aws-sdk";
-import {Readable} from "stream";
+import AWS from 'aws-sdk';
+import {Readable} from 'stream';
 
 /**
  * Used for stream upload when someone makes a POST request
@@ -28,7 +28,7 @@ export function s3PutObjects(bucket: string, path: string, body: Buffer|Uint8Arr
 
                 if (data) {
                     // todo success!
-                    console.log('success!')
+                    console.log('success!');
                     resolve(body);
                 }
             },

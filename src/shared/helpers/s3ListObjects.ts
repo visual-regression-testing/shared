@@ -1,7 +1,7 @@
-import AWS from "aws-sdk";
-import {ListObjectsOutput, ListObjectsRequest} from "@aws-sdk/client-s3";
+import AWS from 'aws-sdk';
+import {ListObjectsOutput, ListObjectsRequest} from '@aws-sdk/client-s3';
 
-export async function s3ListObjects(bucket: string, folder: string = '', otherParams?: Partial<ListObjectsRequest>): Promise<ListObjectsOutput> {
+export async function s3ListObjects(bucket: string, folder = '', otherParams?: Partial<ListObjectsRequest>): Promise<ListObjectsOutput> {
     const s3 = new AWS.S3();
     const params = Object.assign({
         Bucket: bucket,

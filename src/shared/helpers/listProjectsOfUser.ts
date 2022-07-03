@@ -1,4 +1,4 @@
-import {query} from "../../config/db";
+import {query} from '../../config/db';
 
 export interface Project {
     id: string;
@@ -12,7 +12,7 @@ export async function listProjectsOfUser(userEmail: string): Promise<Project[] |
                     INNER JOIN groups_users ON groups_users.group_id = \`groups\`.id 
                     INNER JOIN users ON groups_users.user_id = users.id WHERE users.email = ?`,
             [userEmail]
-        )
+        );
     } catch(e) {
         // todo
     }
