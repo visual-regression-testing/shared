@@ -1,4 +1,4 @@
-import mysql, {RowDataPacket} from 'mysql2'
+import mysql, {OkPacket, RowDataPacket} from 'mysql2'
 
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,
@@ -12,20 +12,7 @@ const pool = mysql.createPool({
 
 const promisePool = pool.promise();
 
-export interface InsertResponse {
-    fieldCount: number; // 0
-    affectedRows: number; // 1
-    insertId: number; // 18
-    serverStatus: number; // 2
-    warningCount: number; // 0
-    message: string; // ''
-    protocol41: boolean; // true
-    changedRows: number; // 0
-}
-
-type Row = import("mysql2").RowDataPacket;
-type Ok = import("mysql2").OkPacket;
-type dbDefaults = Row[] | Row[][] | Ok[] | Ok;
+type dbDefaults = RowDataPacket[] | RowDataPacket[][] | OkPacket[] | OkPacket;
 type dbQuery<T> = T & dbDefaults;
 
 export async function query<T>(

@@ -36,7 +36,7 @@ export function uploadToS3(req: NextApiRequest, bucket: string): Promise<void> {
 
     return new Promise((resolve, reject) => {
         const form = formidable({
-            filter: function ({name, originalFilename, mimetype}) {
+            filter: function ({name, originalFilename, mimetype}: unknown) {
                 // keep only images
                 return !!mimetype && mimetype.includes("image");
             },
@@ -45,7 +45,7 @@ export function uploadToS3(req: NextApiRequest, bucket: string): Promise<void> {
         });
 
         (form as any).parse(req);
-        form.on('error',  (message) => reject(message));
+        form.on('error',  (message: string) => reject(message));
         form.once('end', () => resolve());
     })
 }
