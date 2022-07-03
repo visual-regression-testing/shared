@@ -1,10 +1,14 @@
+import {RowDataPacket} from "mysql2";
 import {query} from "../../config/db";
 
+interface Build extends RowDataPacket {
+    id: number;
+}
 
-export async function createBuildByPercyToken(percyToken: string, branch: string, targetBranch: string | null): Promise<any> {
-    let projectId: [{ id: number | null }] = [{ id: null }]
+export async function createBuildByPercyToken(percyToken: string, branch: string, targetBranch: string | null): Promise<Build[] | undefined> {
+    let projectId: { id: number | null }[] = [{ id: null }]
     try {
-        projectId = await query<[{ id: number }]>(
+        projectId = await query<{ id: number }[]>(
             `SELECT id from projects WHERE percy_token = ? LIMIT 1`, [percyToken]);
     } catch(e) {
         // todo
@@ -13,12 +17,12 @@ export async function createBuildByPercyToken(percyToken: string, branch: string
 
     if (projectId[0].id) {
         try {
-            await query<any>(
+            await query<unknown>(
                 `INSERT into builds (project_id, baseline_branch, branch) VALUES (?, ?, ?)`,
                 [projectId[0].id, targetBranch as string, branch]
             )
 
-            return query<[{  id: number }]>(`SELECT LAST_INSERT_ID() as id`);
+            return query<Build[]>(`SELECT LAST_INSERT_ID() as id`);
         } catch(e) {
             // todo
         }
