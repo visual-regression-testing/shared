@@ -1,4 +1,4 @@
-import mysql, {OkPacket, RowDataPacket} from 'mysql2'
+import mysql, {OkPacket, RowDataPacket} from 'mysql2';
 
 const pool = mysql.createPool({
     host: process.env.MYSQL_HOST,

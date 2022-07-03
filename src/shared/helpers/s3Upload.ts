@@ -1,6 +1,6 @@
-import {ManagedUpload} from "aws-sdk/clients/s3";
-import AWS from "aws-sdk";
-import {PassThrough} from "stream";
+import {ManagedUpload} from 'aws-sdk/clients/s3';
+import AWS from 'aws-sdk';
+import {PassThrough} from 'stream';
 
 /**
  * Used for stream upload when someone makes a POST request
@@ -28,7 +28,7 @@ export function s3Upload(bucket: string, path: string, pass: PassThrough) {
 
                 if (data) {
                     // todo success!
-                    console.log('success!')
+                    console.log('success!');
                     resolve(pass);
                 }
             },
