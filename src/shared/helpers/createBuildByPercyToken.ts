@@ -1,11 +1,11 @@
 import {RowDataPacket} from "mysql2";
 import {query} from "../../config/db";
 
-interface Build extends RowDataPacket {
+export interface PercyBuild extends RowDataPacket {
     id: number;
 }
 
-export async function createBuildByPercyToken(percyToken: string, branch: string, targetBranch: string | null): Promise<Build[] | undefined> {
+export async function createBuildByPercyToken(percyToken: string, branch: string, targetBranch: string | null): Promise<PercyBuild[] | undefined> {
     let projectId: { id: number | null }[] = [{ id: null }]
     try {
         projectId = await query<{ id: number }[]>(
@@ -22,7 +22,7 @@ export async function createBuildByPercyToken(percyToken: string, branch: string
                 [projectId[0].id, targetBranch as string, branch]
             )
 
-            return query<Build[]>(`SELECT LAST_INSERT_ID() as id`);
+            return query<PercyBuild[]>(`SELECT LAST_INSERT_ID() as id`);
         } catch(e) {
             // todo
         }
