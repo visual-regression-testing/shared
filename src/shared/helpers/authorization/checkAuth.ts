@@ -1,8 +1,8 @@
-import {getPercyToken} from '../getPercyToken';
+import { getPercyToken } from '../getPercyToken';
 
 export function checkAuth(authToken: string) {
-    const parsedToken = getPercyToken(authToken);
+  const parsedToken = getPercyToken(authToken);
 
-    // todo get
-    return parsedToken;
+  // todo get
+  return parsedToken;
 }
