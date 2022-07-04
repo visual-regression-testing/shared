@@ -19,7 +19,10 @@ export function uploadToS3(req: NextApiRequest, bucket: string): Promise<void> {
     'x-branch-to-compare-against': branchToCompareAgainst,
   } = req.headers;
 
-  if (!testName || testName.includes('/' || !project || !branch || !branchToCompareAgainst)) {
+  if (
+    !testName ||
+    testName.includes('/' || !project || !branch || !branchToCompareAgainst)
+  ) {
     throw new Error('Required header missing or bad variable');
   }
 
@@ -33,7 +36,11 @@ export function uploadToS3(req: NextApiRequest, bucket: string): Promise<void> {
 
     const pass = new PassThrough();
 
-    s3Upload(bucket, `${project}/${branchToCompareAgainst}/${branch}/${testName}.jpg`, pass);
+    s3Upload(
+      bucket,
+      `${project}/${branchToCompareAgainst}/${branch}/${testName}.jpg`,
+      pass,
+    );
 
     return pass;
   }

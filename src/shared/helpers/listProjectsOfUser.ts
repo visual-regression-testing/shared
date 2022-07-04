@@ -5,7 +5,9 @@ export interface Project {
   name: string;
 }
 
-export async function listProjectsOfUser(userEmail: string): Promise<Project[] | undefined> {
+export async function listProjectsOfUser(
+  userEmail: string,
+): Promise<Project[] | undefined> {
   try {
     return query<Project[]>(
       `SELECT projects.id, projects.name FROM projects INNER JOIN \`groups\` ON projects.group_id = \`groups\`.id

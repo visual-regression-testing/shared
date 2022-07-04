@@ -7,8 +7,15 @@ interface Resource {
   base64_content: string;
 }
 
-export async function getResources(resourceHashIds: string[]): Promise<Resource[]> {
-  const parameterizedQuery = new Array(resourceHashIds.length).fill('?').join(', ');
+export async function getResources(
+  resourceHashIds: string[],
+): Promise<Resource[]> {
+  const parameterizedQuery = new Array(resourceHashIds.length)
+    .fill('?')
+    .join(', ');
 
-  return query<Resource[]>(`SELECT * FROM resources WHERE hash_id IN (${parameterizedQuery})`, resourceHashIds);
+  return query<Resource[]>(
+    `SELECT * FROM resources WHERE hash_id IN (${parameterizedQuery})`,
+    resourceHashIds,
+  );
 }

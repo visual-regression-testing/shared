@@ -15,7 +15,10 @@ const promisePool = pool.promise();
 type dbDefaults = RowDataPacket[] | RowDataPacket[][] | OkPacket[] | OkPacket;
 type dbQuery<T> = T & dbDefaults;
 
-export async function query<T>(q: string, values: (string | number)[] | string | number = []): Promise<[T, any]> {
+export async function query<T>(
+  q: string,
+  values: (string | number)[] | string | number = [],
+): Promise<[T, any]> {
   try {
     return promisePool.query<dbQuery<T>>(q, values);
   } catch (e) {

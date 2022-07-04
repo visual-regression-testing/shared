@@ -1,5 +1,6 @@
 {
   "rules": {
+    "comma-dangle": "off",
     "max-len": [1, {
       "code": 120
     }],
@@ -16,6 +17,7 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "prettier"
   ]
 }

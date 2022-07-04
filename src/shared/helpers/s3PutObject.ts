@@ -9,7 +9,11 @@ import { Readable } from 'stream';
  * @param path
  * @param body
  */
-export function s3PutObjects(bucket: string, path: string, body: Buffer | Uint8Array | Blob | string | Readable) {
+export function s3PutObjects(
+  bucket: string,
+  path: string,
+  body: Buffer | Uint8Array | Blob | string | Readable,
+) {
   const s3Client = new AWS.S3();
 
   return new Promise((resolve, reject) => {

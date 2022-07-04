@@ -65,7 +65,11 @@ async function compareImages(
   // writes the file locally
   // fs.writeFileSync('diff.png', PNG.sync.write(diff));
 
-  await s3PutObjects(config.bucket, `${baseDiffFolder}/diff/${filename}`, PNG.sync.write(diff));
+  await s3PutObjects(
+    config.bucket,
+    `${baseDiffFolder}/diff/${filename}`,
+    PNG.sync.write(diff),
+  );
   return diff;
 }
 

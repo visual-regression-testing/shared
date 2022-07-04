@@ -6,7 +6,9 @@ export interface Build {
   baseline_branch: string;
 }
 
-export async function listBuildsOfProject(projectId: number): Promise<Build[] | undefined> {
+export async function listBuildsOfProject(
+  projectId: number,
+): Promise<Build[] | undefined> {
   try {
     return query<Build[]>(
       'SELECT id, branch, baseline_branch, date_created FROM builds WHERE project_id = ? ORDER BY date_created DESC',
